@@ -28,7 +28,7 @@ body {
   min-height: 100vh;
   font-family: "Space Grotesk", "Inter", "Segoe UI", system-ui, sans-serif;
   color: var(--text);
-  background: linear-gradient(180deg, #020511 0%, #0a0e1f 30%, #0f0d2e 60%, #1a0d3a 100%);
+  background: linear-gradient(180deg, #0a1628 0%, #0d1f3c 30%, #0f2850 60%, #091a3a 100%);
   overflow-x: hidden;
   position: relative;
 }
@@ -39,10 +39,10 @@ body::before {
   inset: 0;
   pointer-events: none;
   background-image:
-    radial-gradient(circle at 16% 14%, rgba(139, 213, 255, 0.18), transparent 10%),
-    radial-gradient(circle at 86% 16%, rgba(200, 145, 255, 0.16), transparent 12%),
-    radial-gradient(circle at 35% 76%, rgba(150, 100, 255, 0.14), transparent 10%),
-    radial-gradient(circle at 56% 40%, rgba(255, 255, 255, 0.08), transparent 16%);
+    radial-gradient(circle at 16% 14%, rgba(100, 180, 255, 0.12), transparent 10%),
+    radial-gradient(circle at 86% 16%, rgba(150, 120, 255, 0.10), transparent 12%),
+    radial-gradient(circle at 35% 76%, rgba(120, 80, 255, 0.08), transparent 10%),
+    radial-gradient(circle at 56% 40%, rgba(200, 220, 255, 0.06), transparent 16%);
   z-index: 1;
 }
 
@@ -52,12 +52,23 @@ body::after {
   inset: 0;
   pointer-events: none;
   background-image:
-    radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.85), 0.5px, transparent 0.55px),
-    radial-gradient(circle at 76% 38%, rgba(255, 255, 255, 0.76), 0.5px, transparent 0.55px),
-    radial-gradient(circle at 42% 62%, rgba(200, 150, 255, 0.60), 0.3px, transparent 0.4px),
-    radial-gradient(circle at 88% 72%, rgba(150, 200, 255, 0.70), 0.4px, transparent 0.5px);
-  background-size: 22px 22px, 28px 28px, 35px 35px, 40px 40px;
-  opacity: 0.28;
+    radial-gradient(circle at 8% 12%, rgba(255, 255, 255, 0.90), 0.5px, transparent 0.55px),
+    radial-gradient(circle at 24% 28%, rgba(255, 255, 255, 0.85), 0.4px, transparent 0.5px),
+    radial-gradient(circle at 38% 8%, rgba(255, 255, 255, 0.88), 0.45px, transparent 0.55px),
+    radial-gradient(circle at 52% 18%, rgba(200, 220, 255, 0.80), 0.4px, transparent 0.5px),
+    radial-gradient(circle at 68% 12%, rgba(255, 255, 255, 0.87), 0.5px, transparent 0.6px),
+    radial-gradient(circle at 76% 38%, rgba(220, 240, 255, 0.82), 0.45px, transparent 0.55px),
+    radial-gradient(circle at 42% 62%, rgba(180, 200, 255, 0.78), 0.4px, transparent 0.5px),
+    radial-gradient(circle at 88% 72%, rgba(200, 220, 255, 0.80), 0.45px, transparent 0.55px),
+    radial-gradient(circle at 18% 82%, rgba(255, 255, 255, 0.85), 0.5px, transparent 0.6px),
+    radial-gradient(circle at 65% 38%, rgba(255, 255, 255, 0.75), 0.4px, transparent 0.5px),
+    radial-gradient(circle at 12% 54%, rgba(200, 220, 255, 0.82), 0.45px, transparent 0.55px),
+    radial-gradient(circle at 82% 68%, rgba(255, 255, 255, 0.80), 0.4px, transparent 0.5px),
+    radial-gradient(circle at 28% 42%, rgba(220, 240, 255, 0.78), 0.45px, transparent 0.55px),
+    radial-gradient(circle at 72% 58%, rgba(255, 255, 255, 0.83), 0.5px, transparent 0.6px),
+    radial-gradient(circle at 45% 85%, rgba(180, 200, 255, 0.75), 0.4px, transparent 0.5px);
+  background-size: 18px 18px, 22px 22px, 26px 26px, 28px 28px, 32px 32px, 25px 25px, 30px 30px, 28px 28px, 35px 35px, 32px 32px, 24px 24px, 36px 36px, 30px 30px, 28px 28px, 32px 32px;
+  opacity: 0.45;
   z-index: 1;
 }
 
@@ -125,17 +136,21 @@ select {
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(circle at 12% 10%, rgba(165, 205, 255, 0.16), transparent 12%),
-    radial-gradient(circle at 90% 10%, rgba(192, 150, 255, 0.14), transparent 14%),
-    radial-gradient(circle at 45% 70%, rgba(104, 146, 255, 0.08), transparent 28%),
-    radial-gradient(circle at 25% 22%, rgba(255, 255, 255, 0.80), 0.6px, transparent 0.7px),
-    radial-gradient(circle at 78% 45%, rgba(255, 255, 255, 0.75), 0.5px, transparent 0.6px),
-    radial-gradient(circle at 52% 18%, rgba(255, 255, 255, 0.70), 0.4px, transparent 0.5px),
-    radial-gradient(circle at 38% 58%, rgba(255, 255, 255, 0.65), 0.4px, transparent 0.5px),
-    radial-gradient(circle at 82% 72%, rgba(255, 255, 255, 0.60), 0.3px, transparent 0.4px),
-    radial-gradient(circle at 18% 82%, rgba(255, 255, 255, 0.68), 0.5px, transparent 0.6px),
-    radial-gradient(circle at 65% 38%, rgba(255, 255, 255, 0.55), 0.3px, transparent 0.4px);
-  background-size: 100% 100%, 100% 100%, 100% 100%, 28px 28px, 35px 35px, 42px 42px, 38px 38px, 45px 45px, 32px 32px, 50px 50px;
+    radial-gradient(circle at 12% 10%, rgba(100, 150, 255, 0.12), transparent 12%),
+    radial-gradient(circle at 90% 10%, rgba(120, 100, 255, 0.10), transparent 14%),
+    radial-gradient(circle at 45% 70%, rgba(80, 120, 255, 0.08), transparent 28%),
+    radial-gradient(circle at 25% 22%, rgba(255, 255, 255, 0.90), 0.6px, transparent 0.7px),
+    radial-gradient(circle at 15% 15%, rgba(255, 255, 255, 0.85), 0.5px, transparent 0.6px),
+    radial-gradient(circle at 78% 45%, rgba(255, 255, 255, 0.88), 0.5px, transparent 0.6px),
+    radial-gradient(circle at 52% 18%, rgba(220, 240, 255, 0.82), 0.45px, transparent 0.55px),
+    radial-gradient(circle at 38% 58%, rgba(255, 255, 255, 0.80), 0.45px, transparent 0.55px),
+    radial-gradient(circle at 82% 72%, rgba(255, 255, 255, 0.85), 0.5px, transparent 0.6px),
+    radial-gradient(circle at 18% 82%, rgba(200, 220, 255, 0.78), 0.45px, transparent 0.55px),
+    radial-gradient(circle at 65% 38%, rgba(255, 255, 255, 0.80), 0.4px, transparent 0.5px),
+    radial-gradient(circle at 42% 8%, rgba(255, 255, 255, 0.87), 0.5px, transparent 0.6px),
+    radial-gradient(circle at 75% 65%, rgba(220, 240, 255, 0.75), 0.4px, transparent 0.5px),
+    radial-gradient(circle at 8% 45%, rgba(255, 255, 255, 0.82), 0.45px, transparent 0.55px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 28px 28px, 32px 32px, 35px 35px, 38px 38px, 42px 42px, 40px 40px, 36px 36px, 44px 44px, 30px 30px, 38px 38px, 34px 34px;
   pointer-events: none;
   z-index: 1;
 }
@@ -145,12 +160,17 @@ select {
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(circle at 15% 35%, rgba(255, 255, 255, 0.72), 0.3px, transparent 0.4px),
-    radial-gradient(circle at 88% 28%, rgba(255, 255, 255, 0.78), 0.4px, transparent 0.5px),
-    radial-gradient(circle at 45% 65%, rgba(255, 255, 255, 0.62), 0.3px, transparent 0.4px),
-    radial-gradient(circle at 72% 15%, rgba(255, 255, 255, 0.68), 0.35px, transparent 0.45px),
-    radial-gradient(circle at 28% 75%, rgba(255, 255, 255, 0.58), 0.3px, transparent 0.4px);
-  background-size: 55px 55px, 62px 62px, 48px 48px, 58px 58px, 52px 52px;
+    radial-gradient(circle at 15% 35%, rgba(255, 255, 255, 0.85), 0.4px, transparent 0.5px),
+    radial-gradient(circle at 88% 28%, rgba(255, 255, 255, 0.88), 0.45px, transparent 0.55px),
+    radial-gradient(circle at 45% 65%, rgba(220, 240, 255, 0.80), 0.4px, transparent 0.5px),
+    radial-gradient(circle at 72% 15%, rgba(255, 255, 255, 0.82), 0.45px, transparent 0.55px),
+    radial-gradient(circle at 28% 75%, rgba(200, 220, 255, 0.78), 0.4px, transparent 0.5px),
+    radial-gradient(circle at 8% 8%, rgba(255, 255, 255, 0.90), 0.5px, transparent 0.6px),
+    radial-gradient(circle at 92% 88%, rgba(255, 255, 255, 0.85), 0.45px, transparent 0.55px),
+    radial-gradient(circle at 55% 45%, rgba(220, 240, 255, 0.82), 0.45px, transparent 0.55px),
+    radial-gradient(circle at 35% 20%, rgba(255, 255, 255, 0.80), 0.4px, transparent 0.5px),
+    radial-gradient(circle at 62% 88%, rgba(200, 220, 255, 0.75), 0.4px, transparent 0.5px);
+  background-size: 48px 48px, 52px 52px, 58px 58px, 45px 45px, 55px 55px, 50px 50px, 60px 60px, 52px 52px, 48px 48px, 56px 56px;
   pointer-events: none;
   z-index: 1;
 }
@@ -192,6 +212,7 @@ h1 {
   font-size: clamp(2.75rem, 4vw, 3.9rem);
   line-height: 1.02;
   letter-spacing: -0.03em;
+  color: #ffffff;
 }
 
 .subtitle {
