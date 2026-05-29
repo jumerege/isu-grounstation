@@ -544,4 +544,55 @@ thresholdValue.textContent = thresholdInput.value;
 setImageControlsEnabled(false);
 drawAllCharts();
 setInterval(pollStatus, 1000);
+
+// ISS Real-Time Tracking
+const GSLatitude = window.GROUNDSTATION.latitude || 48.5233;
+const GSLongitude = window.GROUNDSTATION.longitude || 7.7369;
+const GSAltitude = window.GROUNDSTATION.altitude_m || 143;
+
+function calculateDistance(lat1, lon1, lat2, lon2, alt1, alt2) {
+  // Haversine formula for distance calculation
+  const R = 6371; // Earth radius in km
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  const horizDist = R * c;
+  const vertDist = (alt2 - alt1) / 1000;
+  return Math.sqrt(horizDist * horizDist + vertDist * vertDist);
+}
+
+async function updateISSTracking() {
+  try {
+    const response = await fetch('http://api.open-notify.org/iss-now.json');
+    const data = await response.json();
+    
+    if (data.iss_position) {
+      const issLat = parseFloat(data.iss_position.latitude);
+      const issLon = parseFloat(data.iss_position.longitude);
+      const issAlt = 408; // Average ISS altitude in km
+      
+      // Calculate distance from ground station
+      const distance = calculateDistance(GSLatitude, GSLongitude, issLat, issLon, GSAltitude, issAlt * 1000);
+      
+      // Update DOM
+      document.getElementById('iss-latitude').textContent = issLat.toFixed(4);
+      document.getElementById('iss-longitude').textContent = issLon.toFixed(4);
+      document.getElementById('iss-altitude').textContent = issAlt.toFixed(1);
+      document.getElementById('iss-velocity').textContent = '7.66'; // ISS orbital velocity
+      document.getElementById('iss-distance').textContent = distance.toFixed(1);
+      document.getElementById('iss-visibility').textContent = distance < 2000 ? '✓ Trackable' : '✗ Too far';
+      document.getElementById('iss-updated').textContent = new Date().toLocaleTimeString('en-US');
+    }
+  } catch (error) {
+    console.log('ISS tracking update (non-critical):', error.message);
+  }
+}
+
+// Update ISS tracking every 3 seconds
+updateISSTracking();
+setInterval(updateISSTracking, 3000);
+
 pollStatus();

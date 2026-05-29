@@ -79,7 +79,59 @@
       <p><strong>Altitude :</strong> {{ groundstation.altitude_m | int }} m</p>
 
       <div class="tracker-card" aria-label="Live ISS tracker">
-        <p class="tracker-title"><strong>Live ISS tracking</strong></p>
+        <p class="tracker-title"><strong>🛰️ ISS Real-Time Parameters</strong></p>
+        
+        <!-- ISS Parameters Table -->
+        <div class="iss-parameters-section">
+          <table class="iss-data-table">
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>Value</th>
+                <th>Unit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Latitude</td>
+                <td id="iss-latitude">--</td>
+                <td>°</td>
+              </tr>
+              <tr>
+                <td>Longitude</td>
+                <td id="iss-longitude">--</td>
+                <td>°</td>
+              </tr>
+              <tr>
+                <td>Altitude</td>
+                <td id="iss-altitude">--</td>
+                <td>km</td>
+              </tr>
+              <tr>
+                <td>Velocity</td>
+                <td id="iss-velocity">--</td>
+                <td>km/s</td>
+              </tr>
+              <tr>
+                <td>Distance from GS</td>
+                <td id="iss-distance">--</td>
+                <td>km</td>
+              </tr>
+              <tr>
+                <td>Visibility</td>
+                <td id="iss-visibility">--</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Last Updated</td>
+                <td id="iss-updated" colspan="2">--</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- N2YO Widget -->
+        <p class="tracker-title" style="margin-top: 24px;"><strong>Interactive Map & Pass Predictions</strong></p>
         <div class="tracker-widget">
           <script>
             var norad_n2yo = '25544';

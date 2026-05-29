@@ -563,6 +563,86 @@ button:disabled {
   display: block;
 }
 
+/* ISS Tracker Card Styling */
+.tracker-card {
+  position: relative;
+  width: 100%;
+  padding: 28px;
+  background: rgba(15, 30, 60, 0.92);
+  border: 1px solid rgba(100, 150, 255, 0.18);
+  border-radius: 24px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.24);
+}
+
+.tracker-title {
+  margin: 0 0 16px;
+  font-size: 1.1rem;
+  letter-spacing: 0.01em;
+  color: #ffffff;
+}
+
+.iss-parameters-section {
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+
+.iss-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.iss-data-table thead {
+  background: rgba(80, 120, 180, 0.22);
+  border-bottom: 2px solid rgba(100, 150, 255, 0.28);
+}
+
+.iss-data-table th {
+  padding: 14px 12px;
+  text-align: left;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.01em;
+}
+
+.iss-data-table tbody tr {
+  border-bottom: 1px solid rgba(145, 182, 255, 0.12);
+  transition: background-color 180ms ease;
+}
+
+.iss-data-table tbody tr:hover {
+  background: rgba(100, 150, 255, 0.08);
+}
+
+.iss-data-table td {
+  padding: 12px;
+  color: var(--text);
+}
+
+.iss-data-table td:first-child {
+  font-weight: 600;
+  color: rgba(200, 220, 255, 0.88);
+  min-width: 140px;
+}
+
+.iss-data-table td:nth-child(2) {
+  font-family: 'Monaco', 'Courier New', monospace;
+  font-weight: 700;
+  color: #88ddff;
+  min-width: 120px;
+}
+
+.iss-data-table td:last-child {
+  color: rgba(200, 220, 255, 0.72);
+  text-align: right;
+}
+
+.tracker-widget {
+  margin-top: 16px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
 @media (max-width: 760px) {
   .page-frame {
     padding: 28px 18px 24px;
