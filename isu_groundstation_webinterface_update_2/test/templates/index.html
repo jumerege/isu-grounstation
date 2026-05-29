@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ISU Mission Operations Ground Station</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        window.GROUNDSTATION = {{ groundstation | tojson }};
+    </script>
+</head>
+<body>
+    <main class="page-shell">
+        <section class="panel operations-panel">
+            <header class="title-row">
+                <span class="satellite-icon"> 🛰 </span>
+                <h1>Mission Operations<br>Software</h1>
+            </header>
+
+            <form id="connect-form" class="control-grid">
+                <input id="port-input" name="port" value="COM15" aria-label="Serial port" placeholder="COM15 or /dev/ttyUSB0">
+                <button id="connect-button" type="submit">Connect</button>
+                <button id="unlink-button" type="button">Disconnect</button>
+                <label class="mock-toggle" title="Use this when no ESP32/XBee hardware is connected.">
+                    <input id="mock-input" type="checkbox"> Mock
+                </label>
+            </form>
+
+            <form id="uplink-form" class="uplink-row">
+                <input id="command-input" name="command" placeholder="e.g., 0x13 0xAA 0xB0 0x01 (4 bytes)">
+                <button id="uplink-button" type="submit" disabled>Uplink</button>
+            </form>
+
+            <div class="action-row">
+                <button id="picture-button" class="primary-action" type="button" disabled> 📷 Take Picture</button>
+            </div>
+
+            <div id="image-frame" class="image-frame" aria-live="polite">
+                <div id="image-placeholder">No image received yet</div>
+                <img id="capture-image" alt="Latest satellite camera capture" hidden>
+                <canvas id="processed-canvas" aria-label="Processed camera image" hidden></canvas>
+            </div>
+
+            <section class="panel image-processing-panel">
+                <h2>Camera Image Processing</h2>
+                <div class="image-tool-row">
+                    <label for="process-mode">Mode</label>
+                    <select id="process-mode" disabled>
+                        <option value="original">Original</option>
+                        <option value="grayscale">Grayscale</option>
+                        <option value="contrast">High contrast</option>
+                        <option value="threshold">Threshold</option>
+                        <option value="edges">Edge detect</option>
+                        <option value="invert">Invert</option>
+                    </select>
+                </div>
+                <div class="image-tool-row">
+                    <label for="threshold-input">Threshold <span id="threshold-value">128</span></label>
+                    <input id="threshold-input" type="range" min="0" max="255" value="128" disabled>
+                </div>
+                <button id="download-processed" type="button" disabled>Download current image</button>
+                <p id="image-stats" class="small-status">Image processing will activate after a picture is received.</p>
+            </section>
+        </section>
+
+        <section class="panel groundstation-panel">
+            <h2>{{ groundstation.name }}</h2>
+            <p><strong>Latitude :</strong> {{ '%.4f' | format(groundstation.latitude) }} N</p>
+            <p><strong>Longitude :</strong> {{ '%.4f' | format(groundstation.longitude) }} E</p>
+            <p><strong>Altitude :</strong> {{ groundstation.altitude_m | int }} m</p>
+
+            <div class="tracker-card" aria-label="Live ISS tracker">
+                <p class="tracker-title"><strong>Live ISS tracking</strong></p>
+                <div class="tracker-widget">
+                    <script>
+                        var norad_n2yo = '25544';
+                        var size_n2yo = 'small';
+                        var allpasses_n2yo = '1';
+                        var map_n2yo = '2';
+                    </script>
+                    <script type="text/javascript" src="https://www.n2yo.com/js/widget-tracker.js"></script>
+                </div>
+            </div>
+        </section>
+
+        <aside class="right-column">
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='isu_logo.png') }}" alt="International Space University logo">
+            </div>
+            <section class="panel status-panel">
+                <h2>Satellite Status</h2>
+                <div class="data-group">
+                    <p><strong>Temperature :</strong> <span data-value="temperature" data-unit="°C">--</span></p>
+                    <p><strong>Humidity :</strong> <span data-value="humidity" data-unit="%">--</span></p>
+                    <p><strong>Pressure :</strong> <span data-value="pressure" data-unit="hPa">--</span></p>
+                </div>
+                <div class="data-group">
+                    <p><strong>Acceleration x :</strong> <span data-value="accel_x" data-unit="m/s²">--</span></p>
+                    <p><strong>Acceleration y :</strong> <span data-value="accel_y" data-unit="m/s²">--</span></p>
+                    <p><strong>Acceleration z :</strong> <span data-value="accel_z" data-unit="m/s²">--</span></p>
+                </div>
+                <div class="data-group">
+                    <p><strong>Gyro x :</strong> <span data-value="gyro_x" data-unit="°/s">--</span></p>
+                    <p><strong>Gyro y :</strong> <span data-value="gyro_y" data-unit="°/s">--</span></p>
+                    <p><strong>Gyro z :</strong> <span data-value="gyro_z" data-unit="°/s">--</span></p>
+                </div>
+                <div class="charts-section">
+                    <h3>Live Sensor Graphs</h3>
+                    <canvas data-chart="environment" aria-label="Environment telemetry chart"></canvas>
+                    <canvas data-chart="acceleration" aria-label="Acceleration telemetry chart"></canvas>
+                    <canvas data-chart="gyroscope" aria-label="Gyroscope telemetry chart"></canvas>
+                </div>
+                <div class="refresh-rate">
+                    <strong>Refresh rate:</strong>
+                    <div class="refresh-buttons" aria-label="Sensor refresh rate buttons">
+                        <button data-rate="15s" type="button" disabled>15s</button>
+                        <button data-rate="30s" type="button" disabled>30s</button>
+                        <button data-rate="45s" type="button" disabled>45s</button>
+                        <button data-rate="60s" type="button" disabled>60s</button>
+                        <button data-rate="off" type="button" disabled>Off</button>
+                    </div>
+                </div>
+                <p class="small-status">Connection: <span id="connection-state">disconnected</span></p>
+                <p class="small-status">Last update: <span id="updated-at">--</span></p>
+            </section>
+        </aside>
+    </main>
+    <div id="toast" role="status" aria-live="polite"></div>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

@@ -718,6 +718,16 @@ button:disabled {
   margin-top: 16px;
   border-radius: 16px;
   overflow: hidden;
+  width: 100%;
+  height: 600px;
+  min-height: 600px;
+}
+
+.tracker-widget iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
 }
 
 @media (max-width: 760px) {
