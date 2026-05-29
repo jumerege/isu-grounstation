@@ -17,6 +17,7 @@ const thresholdValue = document.getElementById('threshold-value');
 const downloadProcessedButton = document.getElementById('download-processed');
 const imageStats = document.getElementById('image-stats');
 const toast = document.getElementById('toast');
+const dataStatusButton = document.getElementById('data-status-button');
 const refreshButtons = [...document.querySelectorAll('[data-rate]')];
 const chartCanvases = [...document.querySelectorAll('[data-chart]')];
 
@@ -26,6 +27,8 @@ const PROCESSING_MAX_WIDTH = 1280;
 let toastTimer;
 let sensorHistory = [];
 let lastImageUrl = null;
+let dataReading = false;
+let lastDataTime = null;
 
 const chartSeries = {
   environment: {
@@ -152,6 +155,21 @@ function updateStatus(payload) {
 
   mergeSensorHistory(status.sensor_history || []);
   if (sensors.updated_at) mergeSensorHistory([sensors]);
+  
+  // Update data reading status
+  if (sensors.updated_at && sensors.updated_at !== '--') {
+    dataReading = true;
+    lastDataTime = new Date();
+    dataStatusButton.classList.remove('status-inactive');
+    dataStatusButton.classList.add('status-active');
+    dataStatusButton.querySelector('.status-text').textContent = 'Data: Reading ✓';
+  } else {
+    dataReading = false;
+    dataStatusButton.classList.remove('status-active');
+    dataStatusButton.classList.add('status-inactive');
+    dataStatusButton.querySelector('.status-text').textContent = 'Data: Not Reading';
+  }
+  
   drawAllCharts();
 
   updateImage(status.image);

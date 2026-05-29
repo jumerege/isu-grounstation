@@ -322,6 +322,83 @@ button:disabled {
   gap: 14px;
 }
 
+.status-indicator-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.status-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 0 24px;
+  min-height: 48px;
+  border: 2px solid;
+  border-radius: 18px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  transition: all 200ms ease;
+  cursor: not-allowed;
+}
+
+.status-button.status-inactive {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  border-color: #a93226;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.status-button.status-active {
+  background: linear-gradient(135deg, #27ae60, #229954);
+  border-color: #1e8449;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+  0%, 100% {
+    box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
+  50% {
+    box-shadow: 0 4px 20px rgba(39, 174, 96, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
+}
+
+.status-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulse-dot 1.5s infinite;
+}
+
+.status-button.status-inactive .status-dot {
+  animation: none;
+  opacity: 0.6;
+}
+
+.status-button.status-active .status-dot {
+  animation: pulse-dot 1.5s infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.status-text {
+  font-size: 0.95rem;
+}
+
 .action-row {
   display: flex;
   justify-content: center;
